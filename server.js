@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controller');
+const { clog } = require("./middleware/clog")
 // const helpers = require('./utils/helpers');
 const hbs = exphbs.create({});
 
@@ -22,7 +23,7 @@ const sess = {
         db: sequelize
     })
 };
-// app.use(clog)
+app.use(clog)
 app.use(session(sess));
 
 
