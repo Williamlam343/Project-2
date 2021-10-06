@@ -11,11 +11,11 @@ Movie.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    Title: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Release_date: {
+    release_date: {
       type: DataTypes.DATE,
       allowNull: false,
     },
@@ -23,15 +23,15 @@ Movie.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    Reviews: {
+    reviews: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    Genre: {
+    genre: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    Description: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false,
     },
