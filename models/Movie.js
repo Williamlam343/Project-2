@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Movie extends Model {}
+class Movie extends Model { }
 
 Movie.init(
   {
@@ -24,16 +24,16 @@ Movie.init(
       allowNull: false,
     },
     reviews: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     genre: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     description: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
@@ -44,4 +44,4 @@ Movie.init(
   }
 );
 
-module.exports = Gallery;
+module.exports = Movie;

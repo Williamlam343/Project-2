@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { Movie } = require('../models');
-const withAuth = require('../utils/auth');
+const { Movie } = require('../../models');
+// const withAuth = require('../utils/auth');
 
-router.get('/movie/:id', withAuth, async (req, res) => {
+router.get('/movie/:id', async (req, res) => {
   try {
     const dbMovieData = await Movie.findByPk(req.params.id, {
       include: [
