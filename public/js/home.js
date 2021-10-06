@@ -1,5 +1,4 @@
 // OMDB apikey
-//TODO: how to use dotenv to protect our apikeys
 const formHandler = document.querySelector("#form-handler")
 
 async function titleSearch(e) {
@@ -13,7 +12,6 @@ async function titleSearch(e) {
     }
 
     // if title exists then send a post
-
     if (title.length) {
         const res = await fetch("/", {
             method: "POST",
