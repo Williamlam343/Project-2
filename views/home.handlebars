@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-
+<nav class="navbar navbar-expand-lg bg-dark">
   <div>
     <form id="form-handler" class="form-inline my-2 my-lg-0">
       <input
@@ -17,5 +16,27 @@
   </div>
 
 </nav>
+
+{{#each result}}
+  <div class="card bg-light mb-3 col-8">
+    <img class="img-size" src="{{this.Poster}}" alt="Card image cap" />
+    <div class="card-body">
+      <h5 class="card-title">{{this.Title}}</h5>
+      <p class="card-text">
+        Year:
+        {{this.Year}}
+        <br />
+        Rated:
+        {{this.Rated}}
+        <br />
+        Genre:
+        {{this.Genre}}
+        <br />
+        IMDB Rating:
+        {{this.imdbRating}}</p>
+      <p class="card-text">{{this.Plot}}</p>
+    </div>
+  </div>
+{{/each}}
 
 <script src="/js/home.js"></script>
