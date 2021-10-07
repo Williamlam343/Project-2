@@ -18,25 +18,49 @@
 </nav>
 
 {{#each result}}
-  <div class="card bg-light mb-3 col-8">
-    <img class="img-size" src="{{this.Poster}}" alt="Card image cap" />
-    <div class="card-body">
-      <h5 class="card-title">{{this.Title}}</h5>
-      <p class="card-text">
-        Year:
-        {{this.Year}}
-        <br />
-        Rated:
-        {{this.Rated}}
-        <br />
-        Genre:
-        {{this.Genre}}
-        <br />
-        IMDB Rating:
-        {{this.imdbRating}}</p>
-      <p class="card-text">{{this.Plot}}</p>
+  <form data-imdb="{{imdbID}}" data-poster="{{this.Poster}}">
+    <div class="card bg-light mb-3 col-8">
+      <img
+        class="img-size"
+        src="{{this.Poster}}"
+        alt="movie-poster"
+        onerror="this.onerror=null; this.src='http://example.com/existent-image.jpg';"
+      />
+      <div class="card-body">
+        <h5 class="card-title movie-title">{{this.Title}}</h5>
+        <p class="card-text">
+          Year:
+          <span class="movie-year"> {{this.Year}}</span>
+          <br />
+          Rated:
+          <span class="movie-rated">{{this.Rated}}</span>
+          <br />
+          Genre:
+          <span class="movie-genre">{{this.Genre}}</span>
+          <br />
+          IMDB Rating:
+          <span class="movie-imdbRating">{{this.imdbRating}}</span>
+        </p>
+        <p class="card-text movie-plot">{{this.Plot}}</p>
+        <button
+          type="button"
+          data-imdb="{{imdbID}}"
+          class="btn btn-primary add-watchlist"
+        ><i class="bi bi-eye"></i>
+          <i class="bi bi-eye-fill"></i>
+          Add to Watchlist</button>
+
+        <button
+          type="button"
+          data-imdb="{{imdbID}}"
+          class="btn btn-success mx-2 add-favorite"
+        ><i class="bi bi-heart"></i>
+          <i class="bi bi-heart-fill"></i>
+          Add to Favorites
+        </button>
+      </div>
     </div>
-  </div>
+  </form>
 {{/each}}
 
 <script src="/js/home.js"></script>
