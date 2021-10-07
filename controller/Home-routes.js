@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
   if (req.session.result) {
 
     let result = req.session.result;
+    // resets results after each search
     // req.session.result = null;
     console.log(result)
     res.render("home", { result })
