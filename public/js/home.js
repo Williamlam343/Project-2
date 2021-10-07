@@ -1,6 +1,6 @@
-const watchlistHandler = document.querySelectorAll(".add-watchlist")
-const favoriteHandler = document.querySelectorAll(".add-favorite")
-const formHandler = document.querySelector("#form-handler")
+const searchHandler = document.querySelector("#search-handler")
+const main = document.querySelector("#main")
+
 
 async function titleSearch(e) {
     e.preventDefault();
@@ -33,40 +33,76 @@ async function titleSearch(e) {
 
 }
 
-function addToFavorite(e) {
-    e.preventDefault();
+async function addToFavorite(movie) {
+    const response = await fetch(`/api/favoritelist/${movie.imdbID}`, {
+        method: 'POST',
+        body: JSON.stringify(movie),
+        headers: {
+            "content-type": "application/json",
+        },
+    });
+    if (response.ok) {
+        console.log("awesome successful post")
+    } else {
+        console.log("booo post failed")
+    }
+
 }
 
-async function addToWatchlist(e) {
-    e.preventDefault();
-    console.log(this)
-    if (e.target.hasAttribute("data-imdb")) {
-        const imdbID = e.target.getAttribute("data-imdb")
-        const poster = e.target.getAttribute("data-poster")
-        const title = this.querySelector(".movie-title").textContent
-        const rated = this.querySelector(".movie-rated").textContent
-        const genre = this.querySelector(".movie-genre").textContent
-        const imdbRating = this.querySelector(".movie-imdbRating").textContent
-        const plot = this.querySelector(".movie-plot").textContent
-
-
-        const response = await fetch(`/api/watchlist/${imdbID}`, {
-            method: 'POST',
-            body: JSON.stringify({ title, imdbID, rated, genre, imdbRating, plot, poster }),
-            headers: {
-                "content-type": "application/json",
-            },
-        });
-
-        if (response.ok) {
-            console.log("awesome successful post")
-        } else {
-            console.log("booo post failed")
-        }
+async function addToWatchlist(movie) {
+    const response = await fetch(`/api/watchlist/${movie.imdbID}`, {
+        method: 'POST',
+        body: JSON.stringify(movie),
+        headers: {
+            "content-type": "application/json",
+        },
+    });
+    if (response.ok) {
+        console.log("awesome successful post")
+    } else {
+        console.log("booo post failed")
     }
 }
 
+function sendToDashboard(e) {
+    const button = e.target
+    if (button.matches(".add-watchlist")) {
+        button.classList.replace("bi-eye", "bi-eye-fill")
+        let movie = {
+            imdbID: button.getAttribute("data-imdb"),
+            poster: button.getAttribute("data-poster"),
+            title: button.parentNode.children[0].textContent,
+            rated: button.parentNode.children[1].children[0].textContent,
+            year: button.parentNode.children[1].children[2].textContent,
+            genre: button.parentNode.children[1].children[4].textContent,
+            imdbRating: button.parentNode.children[1].children[6].textContent,
+            plot: button.parentNode.children[2].textContent,
+        }
+        addToWatchlist(movie)
+    }
+    if (button.matches(".add-favorite")) {
+        button.classList.replace("bi-heart", "bi-heart-fill")
 
-watchlistHandler.forEach((btn) => { btn.addEventListener("click", addToWatchlist) })
-favoriteHandler.forEach((btn) => { btn.addEventListener("click", addToFavorite) })
-formHandler.addEventListener("submit", titleSearch)
+        let movie = {
+            imdbID: button.getAttribute("data-imdb"),
+            poster: button.getAttribute("data-poster"),
+            title: button.parentNode.children[0].textContent,
+            rated: button.parentNode.children[1].children[0].textContent,
+            year: button.parentNode.children[1].children[2].textContent,
+            genre: button.parentNode.children[1].children[4].textContent,
+            imdbRating: button.parentNode.children[1].children[6].textContent,
+            plot: button.parentNode.children[2].textContent,
+        }
+        addToFavorite(movie)
+    }
+}
+
+// removes images that do not exist
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('img').forEach(function (img) {
+        img.onerror = function () { this.style.display = 'none'; };
+    })
+});
+
+main.addEventListener("click", sendToDashboard)
+searchHandler.addEventListener("submit", titleSearch)
