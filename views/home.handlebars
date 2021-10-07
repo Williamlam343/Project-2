@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-dark">
   <div>
-    <form id="form-handler" class="form-inline my-2 my-lg-0">
+    <form id="search-handler" class="form-inline my-2 my-lg-0">
       <input
         class="form-control mr-sm-2"
         type="search"
@@ -17,14 +17,16 @@
 
 </nav>
 
-{{#each result}}
-  <form data-imdb="{{imdbID}}" data-poster="{{this.Poster}}">
+<main id="main" class="container">
+
+  {{#each result}}
     <div class="card bg-light mb-3 col-8">
+
       <img
         class="img-size"
         src="{{this.Poster}}"
         alt="movie-poster"
-        onerror="this.onerror=null; this.src='http://example.com/existent-image.jpg';"
+        onerror="this.onerror=null"
       />
       <div class="card-body">
         <h5 class="card-title movie-title">{{this.Title}}</h5>
@@ -45,22 +47,22 @@
         <button
           type="button"
           data-imdb="{{imdbID}}"
-          class="btn btn-primary add-watchlist"
-        ><i class="bi bi-eye"></i>
-          <i class="bi bi-eye-fill"></i>
+          class="bi bi-eye btn btn-primary add-watchlist"
+        >
           Add to Watchlist</button>
 
         <button
           type="button"
+          data-poster="{{this.Poster}}"
           data-imdb="{{imdbID}}"
-          class="btn btn-success mx-2 add-favorite"
-        ><i class="bi bi-heart"></i>
-          <i class="bi bi-heart-fill"></i>
+          class="btn bi bi-heart btn-success mx-2 add-favorite"
+        >
           Add to Favorites
         </button>
       </div>
+
     </div>
-  </form>
-{{/each}}
+  {{/each}}
+</main>
 
 <script src="/js/home.js"></script>
