@@ -23,6 +23,7 @@ async function titleSearch(e) {
         })
 
         if (res.ok) {
+            document.location.replace('/');
             console.log("post received")
         } else {
             console.log("post failed")
