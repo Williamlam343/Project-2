@@ -1,25 +1,31 @@
 const router = require('express').Router();
-const { Movie } = require('../models');
+const { Watchlist, Favorite, User } = require('../models');
 const axios = require("axios")
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/withAuth');
 require("dotenv").config()
 
-router.get("/", async (req, res) => {
+router.get("/login", async (req, res) => {
+  res.render("login")
+})
+
+router.get("/", (req, res) => {
 
   if (req.session.result) {
 
     let result = req.session.result;
     // resets results after each search
     // req.session.result = null;
-    console.log(result)
+    result.forEach((movie) => {
+      if (movie.Poster === "N/A") {
+        movie.Poster = null
+      }
+    })
     res.render("home", { result })
 
   }
   else {
-
     res.render("home")
   }
-
 })
 
 router.post('/', async (req, res, next) => {
@@ -51,13 +57,27 @@ router.post('/', async (req, res, next) => {
 
     let moviesList = await Promise.all(requests)
     req.session.result = moviesList.map((data) => data.data)
-
     res.redirect("/")
   }
   catch (error) {
     res.json(error)
   }
 })
+
+router.get("/dashboard/:id", async (req, res) => {
+  try {
+    const movieData = await User.findByPk(req.params.id, {
+      include: [{ model: Watchlist }, { model: Favorite }]
+    })
+    const movies = movieData.map((data) => data.toJSON())
+
+    res.render("dashboard", { movies })
+
+  } catch (error) {
+    res.json(error)
+  }
+})
+
 
 
 module.exports = router;
