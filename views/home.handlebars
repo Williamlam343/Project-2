@@ -18,48 +18,57 @@
 </nav>
 
 <main id="main" class="container">
-
   {{#each result}}
-    <div class="card bg-light mb-3 col-8">
-      {{#if Poster}}
-        <img class="img-size" src="{{this.Poster}}" alt="movie-poster" />
-      {{/if}}
-      <div class="card-body">
-        <h5 class="card-title movie-title">{{this.Title}}</h5>
-        <p class="card-text">
-          Year:
-          <span class="movie-year"> {{this.Year}}</span>
-          <br />
-          Rated:
-          <span class="movie-rated">{{this.Rated}}</span>
-          <br />
-          Genre:
-          <span class="movie-genre">{{this.Genre}}</span>
-          <br />
-          IMDB Rating:
-          <span class="movie-imdbRating">{{this.imdbRating}}</span>
-        </p>
-        <p class="card-text movie-plot">{{this.Plot}}</p>
-        <button
-          type="button"
-          data-poster="{{this.Poster}}"
-          data-imdb="{{imdbID}}"
-          class="bi bi-eye btn btn-primary add-watchlist"
-        >
-          Add to Watchlist</button>
+    <div class="card col-md-10 mb-3 p-2">
+      <div class="row no-gutters">
+        <div class="col-md-4" style="max-width: 250px;">
+          {{#if Poster}}
+            <img class="card-img" src="{{this.Poster}}" alt="movie-poster" />
+          {{/if}}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title movie-title">{{this.Title}}</h5>
+            <p class="card-text">
+              Year:
+              <span class="movie-year"> {{this.Year}}</span>
+              <br />
+              Rated:
+              <span class="movie-rated">{{this.Rated}}</span>
+              <br />
+              Genre:
+              <span class="movie-genre">{{this.Genre}}</span>
+              <br />
+              IMDB Rating:
+              <span class="movie-imdbRating">{{this.imdbRating}}</span>
+            </p>
+            <p class="card-text movie-plot">{{this.Plot}}</p>
+            <div>
 
-        <button
-          type="button"
-          data-poster="{{this.Poster}}"
-          data-imdb="{{imdbID}}"
-          class="btn bi bi-heart btn-success mx-2 add-favorite"
-        >
-          Add to Favorites
-        </button>
+              <button
+                type="button"
+                data-poster="{{this.Poster}}"
+                data-imdb="{{imdbID}}"
+                class="bi bi-eye btn btn-primary add-watchlist"
+              >
+                Add to Watchlist</button>
+
+              <button
+                type="button"
+                data-poster="{{this.Poster}}"
+                data-imdb="{{imdbID}}"
+                class="btn bi bi-heart btn-success mx-2 add-favorite"
+              >
+                Add to Favorites
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
+
   {{/each}}
+
 </main>
 
 <script src="/js/home.js"></script>

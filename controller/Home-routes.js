@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
   if (req.session.result) {
 
     let result = req.session.result;
+
     // resets results after each search
     // req.session.result = null;
     result.forEach((movie) => {
@@ -20,7 +21,8 @@ router.get("/", (req, res) => {
         movie.Poster = null
       }
     })
-    res.render("home", { result })
+    console.log(req.session.logged_in)
+    res.render("home", { result, loggedIn: req.session.logged_in })
 
   }
   else {

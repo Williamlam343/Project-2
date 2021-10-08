@@ -42,6 +42,7 @@ async function addToFavorite(movie) {
         },
     });
     if (response.ok) {
+
         console.log("awesome successful post")
     } else {
         console.log("booo post failed")
@@ -58,6 +59,7 @@ async function addToWatchlist(movie) {
         },
     });
     if (response.ok) {
+
         console.log("awesome successful post")
     } else {
         console.log("booo post failed")
@@ -101,12 +103,6 @@ function sendToDashboard(e) {
     }
 }
 
-// removes images that do not exist
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('img').forEach(function (img) {
-        img.onerror = function () { this.style.display = 'none'; };
-    })
-});
 
 main.addEventListener("click", sendToDashboard)
 searchHandler.addEventListener("submit", titleSearch)
