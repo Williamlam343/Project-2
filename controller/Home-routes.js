@@ -8,6 +8,10 @@ router.get("/login", async (req, res) => {
   res.render("login")
 })
 
+router.get("/signup", (req, res) => {
+  res.render("signup")
+})
+
 router.get("/", (req, res) => {
 
   if (req.session.result) {
