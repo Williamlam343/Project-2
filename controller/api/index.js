@@ -8,6 +8,4 @@ router.use("/movie", movie)
 router.use("/user", user)
 
 
-
-
 module.exports = router;
