@@ -16,7 +16,6 @@
   </div>
 
 </nav>
-
 <main id="main" class="container">
   {{#each result}}
     <div class="card col-md-10 mb-3 p-2">
@@ -44,29 +43,31 @@
             </p>
             <p class="card-text movie-plot">{{this.Plot}}</p>
             <div>
+              {{#if Login}}
 
-              <button
-                type="button"
-                data-poster="{{this.Poster}}"
-                data-imdb="{{imdbID}}"
-                class="bi bi-eye btn btn-primary add-watchlist"
-              >
-                Add to Watchlist</button>
+                <button
+                  type="button"
+                  data-poster="{{this.Poster}}"
+                  data-imdb="{{imdbID}}"
+                  class="bi bi-eye btn btn-primary add-watchlist"
+                >
+                  Add to Watchlist</button>
 
-              <button
-                type="button"
-                data-poster="{{this.Poster}}"
-                data-imdb="{{imdbID}}"
-                class="btn bi bi-heart btn-success mx-2 add-favorite"
-              >
-                Add to Favorites
-              </button>
+                <button
+                  type="button"
+                  data-poster="{{this.Poster}}"
+                  data-imdb="{{imdbID}}"
+                  class="btn bi bi-heart btn-success mx-2 add-favorite"
+                >
+                  Add to Favorites
+                </button>
+
+              {{/if}}
             </div>
           </div>
         </div>
       </div>
     </div>
-
   {{/each}}
 
 </main>
