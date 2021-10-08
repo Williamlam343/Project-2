@@ -20,9 +20,11 @@ router.get("/", (req, res) => {
       if (movie.Poster === "N/A") {
         movie.Poster = null
       }
+      movie.Login = req.session.logged_in
     })
-    console.log(req.session.logged_in)
-    res.render("home", { result, loggedIn: req.session.logged_in })
+    console.log(result)
+
+    res.render("home", { result })
 
   }
   else {
