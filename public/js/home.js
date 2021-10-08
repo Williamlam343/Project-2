@@ -34,7 +34,7 @@ async function titleSearch(e) {
 }
 
 async function addToFavorite(movie) {
-    const response = await fetch(`/api/favoritelist/${movie.imdbID}`, {
+    const response = await fetch(`/api/movie/favorite`, {
         method: 'POST',
         body: JSON.stringify(movie),
         headers: {
@@ -50,7 +50,7 @@ async function addToFavorite(movie) {
 }
 
 async function addToWatchlist(movie) {
-    const response = await fetch(`/api/watchlist/${movie.imdbID}`, {
+    const response = await fetch(`/api/movie/watchlist`, {
         method: 'POST',
         body: JSON.stringify(movie),
         headers: {
@@ -72,12 +72,14 @@ function sendToDashboard(e) {
             imdbID: button.getAttribute("data-imdb"),
             poster: button.getAttribute("data-poster"),
             title: button.parentNode.children[0].textContent,
-            rated: button.parentNode.children[1].children[0].textContent,
-            year: button.parentNode.children[1].children[2].textContent,
+            year: button.parentNode.children[1].children[0].textContent,
+            rated: button.parentNode.children[1].children[2].textContent,
             genre: button.parentNode.children[1].children[4].textContent,
             imdbRating: button.parentNode.children[1].children[6].textContent,
             plot: button.parentNode.children[2].textContent,
+            // list: false
         }
+        console.log(movie)
         addToWatchlist(movie)
     }
     if (button.matches(".add-favorite")) {
@@ -87,12 +89,14 @@ function sendToDashboard(e) {
             imdbID: button.getAttribute("data-imdb"),
             poster: button.getAttribute("data-poster"),
             title: button.parentNode.children[0].textContent,
-            rated: button.parentNode.children[1].children[0].textContent,
-            year: button.parentNode.children[1].children[2].textContent,
+            year: button.parentNode.children[1].children[0].textContent,
+            rated: button.parentNode.children[1].children[2].textContent,
             genre: button.parentNode.children[1].children[4].textContent,
             imdbRating: button.parentNode.children[1].children[6].textContent,
             plot: button.parentNode.children[2].textContent,
+            // list: true
         }
+
         addToFavorite(movie)
     }
 }

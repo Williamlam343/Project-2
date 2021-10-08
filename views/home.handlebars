@@ -21,13 +21,9 @@
 
   {{#each result}}
     <div class="card bg-light mb-3 col-8">
-
-      <img
-        class="img-size"
-        src="{{this.Poster}}"
-        alt="movie-poster"
-        onerror="this.onerror=null"
-      />
+      {{#if Poster}}
+        <img class="img-size" src="{{this.Poster}}" alt="movie-poster" />
+      {{/if}}
       <div class="card-body">
         <h5 class="card-title movie-title">{{this.Title}}</h5>
         <p class="card-text">
@@ -46,6 +42,7 @@
         <p class="card-text movie-plot">{{this.Plot}}</p>
         <button
           type="button"
+          data-poster="{{this.Poster}}"
           data-imdb="{{imdbID}}"
           class="bi bi-eye btn btn-primary add-watchlist"
         >
