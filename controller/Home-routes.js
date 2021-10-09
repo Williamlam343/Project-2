@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
     let result = req.session.result;
 
     // resets results after each search
-    // req.session.result = null;
+    req.session.result = null;
     result.forEach((movie) => {
       if (movie.Poster === "N/A") {
         movie.Poster = null
@@ -24,11 +24,19 @@ router.get("/", (req, res) => {
     })
     console.log(result)
 
-    res.render("home", { result })
+    res.render("home", {
+      result,
+      logged_in: req.session.logged_in,
+      id: req.session.user_id
+    })
 
   }
   else {
-    res.render("home")
+    console.log(req.session.user_id)
+    res.render("home", {
+      logged_in: req.session.logged_in,
+      id: req.session.user_id
+    })
   }
 })
 
@@ -68,20 +76,29 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.get("/dashboard/:id", async (req, res) => {
+router.get("/dashboard", withAuth)
+
+router.get("/dashboard/:id", withAuth, async (req, res) => {
   try {
     const movieData = await User.findByPk(req.params.id, {
       include: [{ model: Watchlist }, { model: Favorite }]
     })
-    const movies = movieData.map((data) => data.toJSON())
 
-    res.render("dashboard", { movies })
+    const movies = movieData.toJSON()
 
+    // res.json(movieData.Watchlists)
+    let watchlists = movies.Watchlists
+    let favorites = movies.Favorites
+
+
+    res.render("dashboard", {
+      watchlists, favorites,
+      logged_in: req.session.logged_in,
+      id: req.session.user_id
+    })
   } catch (error) {
     res.json(error)
   }
 })
-
-
 
 module.exports = router;
