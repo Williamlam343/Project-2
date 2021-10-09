@@ -23,7 +23,6 @@ const sess = {
         db: sequelize
     })
 };
-app.use(clog)
 app.use(session(sess));
 
 
@@ -34,6 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(clog)
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
