@@ -21,10 +21,6 @@ const signUpHandler = async (event) => {
         }
     }
 
-    console.log(username)
-    console.log(email)
-    console.log(password)
-
 }
 
 formHandler.addEventListener("submit", signUpHandler)
