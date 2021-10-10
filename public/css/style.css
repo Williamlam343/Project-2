@@ -6,3 +6,19 @@
   z-index: 99;
   cursor: pointer;
 }
+
+.background {
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  background: URL(/img/kisspng-photographic-film-cinema-portable-network-graphics-hanju-svg-png-icon-free-download-1863-7-onlin-5be32f3ba46098.7485622415416154196733.png);
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position-y: -25%;
+}
+
+.bg-black {
+  background-color: black;
+}
