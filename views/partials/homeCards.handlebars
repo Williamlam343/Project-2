@@ -1,0 +1,54 @@
+<div class="card col-md-5 mb-3 p-2">
+  <div class="row no-gutters">
+    <div class="col-md-4" style="">
+      {{#if Poster}}
+        <img
+          class="card-img img-fluid"
+          src="{{this.Poster}}"
+          alt="movie-poster"
+        />
+      {{/if}}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title movie-title">{{this.Title}}</h5>
+        <p class="card-text">
+          Year:
+          <span class="movie-year"> {{this.Year}}</span>
+          <br />
+          Rated:
+          <span class="movie-rated">{{this.Rated}}</span>
+          <br />
+          Genre:
+          <span class="movie-genre">{{this.Genre}}</span>
+          <br />
+          IMDB Rating:
+          <span class="movie-imdbRating">{{this.imdbRating}}</span>
+        </p>
+        <p class="card-text movie-plot">{{this.Plot}}</p>
+
+        {{#if Login}}
+
+          <button
+            type="button"
+            data-poster="{{this.Poster}}"
+            data-imdb="{{imdbID}}"
+            class="bi bi-eye btn btn-primary m-1 add-watchlist"
+          >
+            Add to Watchlist</button>
+
+          <button
+            type="button"
+            data-poster="{{this.Poster}}"
+            data-imdb="{{imdbID}}"
+            class="btn bi bi-heart btn-success m-1 add-favorite"
+          >
+            Add to Favorites
+          </button>
+
+        {{/if}}
+
+      </div>
+    </div>
+  </div>
+</div>
