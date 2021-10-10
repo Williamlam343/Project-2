@@ -1,4 +1,4 @@
-<div class="card col-md-5 mb-3 p-3">
+<div class="card col-md-5 watchlist-card mb-3 p-3">
   <div class="row no-gutters">
     <div class="col-md-4" style="max-width: 250px;">
       {{#if poster}}
@@ -26,9 +26,11 @@
 
           <button
             type="button"
-            data-poster="{{this.poster}}"
-            data-imdb="{{imdbID}}"
-            class="btn bi bi-heart btn-danger mx-2 add-favorite"
+            data-tab="watchlist"
+            id="{{this.id}}"
+            {{! data-bs-toggle="modal"
+            data-bs-target="#watchlistModal" }}
+            class="btn bi bi-heart btn-danger mx-2 add-favorite remove-card"
           >
             Remove
           </button>

@@ -68,7 +68,7 @@ async function addToWatchlist(movie) {
 
 function sendToDashboard(e) {
     const button = e.target
-    console.log(button.parentNode)
+
     if (button.matches(".add-watchlist")) {
         button.classList.replace("bi-eye", "bi-eye-fill")
         let movie = {

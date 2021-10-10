@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Watchlist, Favorite, User } = require('../models');
 const axios = require("axios")
 const withAuth = require('../utils/withAuth');
+const { Router } = require('express');
 require("dotenv").config()
 
 router.get("/login", async (req, res) => {
@@ -104,5 +105,26 @@ router.get("/dashboard/:id", withAuth, async (req, res) => {
     res.json(error)
   }
 })
+
+router.get(`/dashboard/:id/:favorites`, async (req, res) => {
+  try {
+    const movieData = await User.findByPk(req.params.id, {
+      include: [{ model: Watchlist }, { model: Favorite }]
+    })
+    const movies = movieData.toJSON()
+
+    let watchlists = movies.Watchlists
+    let favorites = movies.Favorites
+
+    res.render("favorite", {
+      watchlists, favorites,
+      logged_in: req.session.logged_in,
+      id: req.session.user_id
+    })
+  } catch (error) {
+    res.json(error)
+  }
+})
+
 
 module.exports = router;

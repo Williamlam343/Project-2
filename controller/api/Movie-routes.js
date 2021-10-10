@@ -19,6 +19,27 @@ router.post("/watchlist", withAuth, async (req, res) => {
   }
 })
 
+router.delete("/watchlist/:id", async (req, res) => {
+
+  try {
+    console.log(req.params.id)
+    const movieData = await Watchlist.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if (!movieData) {
+      res.status(404).json("movie id not found")
+    }
+    res.status(200).json("deletion successful")
+  } catch (error) {
+    res.status(500).json(error)
+  }
+
+})
+
+
 router.post("/favorite", withAuth, async (req, res) => {
   try {
     const movieData = await Favorite.create(
@@ -30,6 +51,27 @@ router.post("/favorite", withAuth, async (req, res) => {
   } catch (error) {
     res.status(400).json(error)
   }
+})
+
+router.delete("/favorite/:id", async (req, res) => {
+
+  try {
+    console.log(req.params.id)
+    const movieData = await Favorite.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if (!movieData) {
+      res.status(404).json("movie id not found")
+    }
+    res.status(200).json("deletion successful")
+
+  } catch (error) {
+    res.status(500).json(error)
+  }
+
 })
 
 
