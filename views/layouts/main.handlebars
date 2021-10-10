@@ -3,6 +3,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/jpg" href="/img/Manuel-Morillo-Dog-Dog-1.ico">
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/reset.css" />
     <link
@@ -38,16 +39,17 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="mx-5">
-          <h1 class="text-light">Watch_Dogs</h1>
+        <div class="mx-1 d-flex align-center">
+          <img src="/img/paw.png" class="d-inline" alt="" style="width:50px; height:50px;">
+          <h1 class="text-light d-inline">Watch_Dogs</h1>
         </div>
       </div>
     </nav>
 
     <div class="collapse" id="navbarToggleExternalContent">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+      <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container-fluid text-start">
 
           <button
             class="navbar-toggler"
@@ -83,11 +85,34 @@
       </nav>
 
     </div>
-    <div class="container-lg">
+    <button class="btn text-light fixed-buttom btn-danger" onclick="topFunction()" id="myBtn" >Top</button>
+    <div class="container-fluid">
       {{{body}}}
     </div>
   </body>
 </html>
+  <script>
+    
+//Get the button:
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+  </script>
 {{#if logged_in}}
   <script src="/js/Logout.js"></script>
 {{/if}}

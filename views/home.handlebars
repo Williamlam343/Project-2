@@ -1,28 +1,32 @@
-<nav class="navbar navbar-expand-lg bg-dark">
-  <div class="container">
-    <form id="search-handler" class="form-inline my-2 my-lg-10">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        id="search-text"
-      />
-      <button
-        class="btn btn-outline-success my-2 my-sm-0"
-        type="submit"
-      >Search</button>
-    </form>
-  </div>
+<div class="container d-flex col-8 justify-content-center">
+  <img src="/img/dog.png" alt="doggo" style="width:200px; height: 200px;" />
+</div>
 
-</nav>
+<div class="container d-flex col-8 justify-content-center">
+
+  <form id="search-handler" class="d-flex col-12 col-md-6 mb-5">
+    <input
+      class="form-control"
+      type="search"
+      placeholder="Search movies"
+      aria-label="Search"
+      id="search-text"
+    />
+    <button class="btn btn-success m-2" type="submit">Search</button>
+  </form>
+</div>
+
 <main id="main" class="container">
   {{#each result}}
     <div class="card col-md-10 mb-3 p-2">
       <div class="row no-gutters">
-        <div class="col-md-4" style="max-width: 250px;">
+        <div class="col-md-4" style="">
           {{#if Poster}}
-            <img class="card-img" src="{{this.Poster}}" alt="movie-poster" />
+            <img
+              class="card-img img-fluid"
+              src="{{this.Poster}}"
+              alt="movie-poster"
+            />
           {{/if}}
         </div>
         <div class="col-md-8">
@@ -49,7 +53,7 @@
                 type="button"
                 data-poster="{{this.Poster}}"
                 data-imdb="{{imdbID}}"
-                class="bi bi-eye btn btn-primary add-watchlist"
+                class="bi bi-eye btn btn-primary m-1 add-watchlist"
               >
                 Add to Watchlist</button>
 
@@ -57,7 +61,7 @@
                 type="button"
                 data-poster="{{this.Poster}}"
                 data-imdb="{{imdbID}}"
-                class="btn bi bi-heart btn-success mx-2 add-favorite"
+                class="btn bi bi-heart btn-success m-1 add-favorite"
               >
                 Add to Favorites
               </button>

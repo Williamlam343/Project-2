@@ -60,7 +60,7 @@ router.post('/', async (req, res, next) => {
     const imdbTDArr = []
 
     // grabs first 5 movie imdb IDs
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       imdbTDArr.push(data.Search[i].imdbID)
     }
 
