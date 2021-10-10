@@ -26,14 +26,50 @@
 
           <button
             type="button"
-            data-tab="watchlist"
-            id="{{this.id}}"
-            class="btn bi bi-heart btn-danger mx-2 add-favorite remove-card"
+            data-tab="favorite"
+            data-bs-toggle="modal"
+            data-bs-target="#watchlistModal-{{this.id}}"
+            class="btn bi bi-heart btn-danger mx-2"
           >
             Remove
           </button>
 
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{! MODAL }}
+<div
+  class="modal fade"
+  id="watchlistModal-{{this.id}}"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Removing from Favorites</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
+        <button
+          data-tab="favorite"
+          type="button"
+          id="{{this.id}}"
+          class="btn btn-primary remove-card"
+        >Confirm</button>
       </div>
     </div>
   </div>
