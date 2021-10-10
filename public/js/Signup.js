@@ -15,9 +15,9 @@ const signUpHandler = async (event) => {
 
         if (res.ok) {
             document.location.replace("/")
-            console.log("sign up successful")
+
         } else {
-            console.log("sign up failed")
+
         }
     }
 

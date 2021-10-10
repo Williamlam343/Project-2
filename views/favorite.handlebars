@@ -1,19 +1,18 @@
-<nav class="navbar my-5 navbar-expand-lg navbar-light bg-light">
+<nav class="navbar border rounded-3 my-5 bg-light">
   <!-- Navbar content -->
-  <div class="container-fluid">
 
-    <ul class="nav nav-tabs">
+    <ul class="nav">
       <li class="nav-item">
         <a
           id="watch-tab"
-          class="nav-link dashboard-link text-dark"
+          class="nav-link text-dark"
           aria-current="page"
           href="/dashboard/{{id}}"
         >&#128064; Watchlist</a>
       </li>
       <li class="nav-item">
         <a
-          class="nav-link dashboard-link text-dark"
+          class="nav-link text-dark"
           id="fave-tab"
           href="/dashboard/{{id}}/favorite"
         >
@@ -21,53 +20,15 @@
       </li>
 
     </ul>
-  </div>
+ 
+</nav>
+
 </nav>
 
 <h3 class="text-light">Your Favorites:</h3>
-<section class="container-lg d-flex justify-content-evenly flex-wrap">
+<section id="cards-container" class="container-fluid d-flex justify-content-evenly flex-wrap">
   {{#each favorites}}
-    <div class="card col-md-5 watchlist-card mb-3 p-3">
-      <div class="row no-gutters">
-        <div class="col-md-4" style="max-width: 250px;">
-          {{#if poster}}
-            <img class="card-img" src="{{this.poster}}" alt="movie-poster" />
-          {{/if}}
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title movie-title">{{this.title}}</h5>
-            <p class="card-text">
-              Year:
-              <span class="movie-year"> {{this.year}}</span>
-              <br />
-              Rated:
-              <span class="movie-rated">{{this.rated}}</span>
-              <br />
-              Genre:
-              <span class="movie-genre">{{this.genre}}</span>
-              <br />
-              IMDB Rating:
-              <span class="movie-imdbRating">{{this.imdbRating}}</span>
-            </p>
-            <p class="card-text movie-plot">{{this.plot}}</p>
-            <div>
-
-              <button
-                type="button"
-                data-tab="favorite"
-                id="{{this.id}}"
-                class="btn bi bi-heart btn-danger mx-2 add-favorite remove-card"
-              >
-                Remove
-              </button>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+   {{>favoritesCards}}
   {{/each}}
 </section>
 

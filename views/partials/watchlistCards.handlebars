@@ -1,0 +1,75 @@
+<div class="card col-md-5 watchlist-card mb-3 p-3">
+  <div class="row no-gutters">
+    <div class="col-md-4" style="max-width: 250px;">
+      {{#if poster}}
+        <img class="card-img" src="{{this.poster}}" alt="movie-poster" />
+      {{/if}}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title movie-title">{{this.title}}</h5>
+        <p class="card-text">
+          Year:
+          <span class="movie-year"> {{this.year}}</span>
+          <br />
+          Rated:
+          <span class="movie-rated">{{this.rated}}</span>
+          <br />
+          Genre:
+          <span class="movie-genre">{{this.genre}}</span>
+          <br />
+          IMDB Rating:
+          <span class="movie-imdbRating">{{this.imdbRating}}</span>
+        </p>
+        <p class="card-text movie-plot">{{this.plot}}</p>
+        <div>
+          {{! MODAL BUTTON }}
+          <button
+            type="button"
+            data-tab="watchlist"
+            data-bs-toggle="modal"
+            data-bs-target="#watchlistModal-{{this.id}}"
+            class="btn bi bi-heart btn-danger mx-2"
+          >
+            Remove
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{! MODAL }}
+<div
+  class="modal fade"
+  id="watchlistModal-{{this.id}}"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Removing from Watchlist</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
+        <button
+          data-tab="watchlist"
+          type="button"
+          id="{{this.id}}"
+          class="btn btn-primary remove-card"
+        >Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

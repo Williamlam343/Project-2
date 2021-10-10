@@ -7,7 +7,7 @@ function evtDelegation(e) {
         let id = click.id
         let tab = click.getAttribute("data-tab")
 
-        console.log(`removing this card, ${id} from ${tab}`)
+
         removeCard(id, tab)
     }
 }
@@ -26,5 +26,5 @@ async function removeCard(id, tab) {
     }
 }
 
-// document.querySelector(".modal-content").addEventListener("click", evtDelegation)
-document.querySelector(".container-lg").addEventListener("click", evtDelegation)
+
+document.querySelector("#cards-container").addEventListener("click", evtDelegation)

@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { Watchlist, Favorite, User } = require('../models');
 const axios = require("axios")
 const withAuth = require('../utils/withAuth');
-const { Router } = require('express');
 require("dotenv").config()
 
 router.get("/login", async (req, res) => {
@@ -20,14 +19,14 @@ router.get("/", (req, res) => {
     let result = req.session.result;
 
     // resets results after each search
-    // req.session.result = null;
+    req.session.result = null;
+
     result.forEach((movie) => {
       if (movie.Poster === "N/A") {
         movie.Poster = null
       }
       movie.Login = req.session.logged_in
     })
-    console.log(result)
 
     res.render("home", {
       result,
@@ -36,8 +35,8 @@ router.get("/", (req, res) => {
     })
 
   }
+
   else {
-    console.log(req.session.user_id)
     res.render("home", {
       logged_in: req.session.logged_in,
       id: req.session.user_id
@@ -52,28 +51,31 @@ router.post('/', async (req, res, next) => {
       apikey: process.env.APIKEY,
       type: "movie"
     }
+
     let queryString = new URLSearchParams(searchQuery)
     let URL = `http://www.omdbapi.com/?${queryString}`
-
+    // sends a fetch request via axios to grab movies
     let Moviedata = await axios.get(URL)
     const { data } = Moviedata
     const imdbTDArr = []
 
-    // grabs first 5 movie imdb IDs
-    for (let i = 0; i < 5; i++) {
+    // grabs first 10 movie imdb IDs
+    for (let i = 0; i < 10; i++) {
       imdbTDArr.push(data.Search[i].imdbID)
     }
 
+    // creates a request array with an array of IDs
     const requests = imdbTDArr.map(
-      (id) =>
-      (
-        axios.get(`http://www.omdbapi.com/?apikey=${searchQuery.apikey}&i=${id}`)
-      )
+      // sends req to fetch all movies be id
+      id => axios.get(`http://www.omdbapi.com/?apikey=${searchQuery.apikey}&i=${id}`)
     );
-    // sends req to fetch all movies be id
 
+    // returns a promise obj from endpoint
     let moviesList = await Promise.all(requests)
+
+    // stores movies into session
     req.session.result = moviesList.map((data) => data.data)
+    // redirects the data to another endpoint
     res.redirect("/")
   }
   catch (error) {
@@ -91,10 +93,8 @@ router.get("/dashboard/:id", withAuth, async (req, res) => {
 
     const movies = movieData.toJSON()
 
-    // res.json(movieData.Watchlists)
     let watchlists = movies.Watchlists
     let favorites = movies.Favorites
-
 
     res.render("dashboard", {
       watchlists, favorites,
