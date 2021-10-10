@@ -2,12 +2,12 @@
 
 function evtDelegation(e) {
     let click = e.target
-    console.log(click)
+
     if (click.matches(".remove-card")) {
         let id = click.id
         let tab = click.getAttribute("data-tab")
 
-        console.log(`removing this card, ${id} from ${tab}`)
+
         removeCard(id, tab)
     }
 }

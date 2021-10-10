@@ -24,9 +24,9 @@ async function titleSearch(e) {
 
         if (res.ok) {
             document.location.replace('/');
-            console.log("post received")
+
         } else {
-            console.log("post failed")
+
         }
 
     }
@@ -43,9 +43,9 @@ async function addToFavorite(movie) {
     });
     if (response.ok) {
 
-        console.log("awesome successful post")
+
     } else {
-        console.log("booo post failed")
+
     }
 
 }
@@ -60,9 +60,9 @@ async function addToWatchlist(movie) {
     });
     if (response.ok) {
 
-        console.log("awesome successful post")
+
     } else {
-        console.log("booo post failed")
+
     }
 }
 
@@ -82,7 +82,7 @@ function sendToDashboard(e) {
             plot: button.parentNode.children[2].textContent,
 
         }
-        console.log(movie)
+
         addToWatchlist(movie)
     }
     if (button.matches(".add-favorite")) {
