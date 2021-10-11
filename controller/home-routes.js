@@ -46,12 +46,13 @@ router.get("/", (req, res) => {
 
 router.post('/', async (req, res, next) => {
   try {
+
     let searchQuery = {
       ...req.body,
       apikey: process.env.APIKEY,
       type: "movie"
     }
-
+    console.log(searchQuery)
     let queryString = new URLSearchParams(searchQuery)
     let URL = `http://www.omdbapi.com/?${queryString}`
     // sends a fetch request via axios to grab movies
