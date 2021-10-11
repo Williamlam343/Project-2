@@ -13,19 +13,19 @@ router.get("/signup", (req, res) => {
 })
 
 router.get("/", (req, res) => {
-
+  console.log("hello world")
+  console.log(req.session.result)
   if (req.session.result) {
 
     let result = req.session.result;
 
     // resets results after each search
-    req.session.result = null;
+    // req.session.result = null;
 
     result.forEach((movie) => {
       if (movie.Poster === "N/A") {
         movie.Poster = null
       }
-      movie.Login = req.session.logged_in
     })
 
     res.render("home", {
@@ -33,7 +33,6 @@ router.get("/", (req, res) => {
       logged_in: req.session.logged_in,
       id: req.session.user_id
     })
-
   }
 
   else {
