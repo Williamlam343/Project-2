@@ -13,8 +13,7 @@ router.get("/signup", (req, res) => {
 })
 
 router.get("/", (req, res) => {
-  console.log("hello world")
-  console.log(req.session.result)
+
   if (req.session.result) {
 
     let result = req.session.result;
@@ -26,13 +25,15 @@ router.get("/", (req, res) => {
       if (movie.Poster === "N/A") {
         movie.Poster = null
       }
+      movie.Login = req.session.logged_in
     })
 
     res.render("home", {
       result,
-      logged_in: req.session.logged_in,
+
       id: req.session.user_id
     })
+
   }
 
   else {
