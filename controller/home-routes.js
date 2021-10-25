@@ -18,9 +18,6 @@ router.get("/", (req, res) => {
 
     let result = req.session.result;
 
-    // resets results after each search
-    // req.session.result = null;
-
     result.forEach((movie) => {
       if (movie.Poster === "N/A") {
         movie.Poster = null
@@ -52,13 +49,14 @@ router.post('/', async (req, res, next) => {
       apikey: process.env.APIKEY,
       type: "movie"
     }
+
     let queryString = new URLSearchParams(searchQuery)
     let URL = `http://www.omdbapi.com/?${queryString}`
     // sends a fetch request via axios to grab movies
     let Moviedata = await axios.get(URL)
     const { data } = Moviedata
     const imdbTDArr = []
-    console.log(URL)
+
 
     // grabs first 10 movie imdb IDs
     for (let i = 0; i < 10; i++) {
@@ -70,13 +68,14 @@ router.post('/', async (req, res, next) => {
       // sends req to fetch all movies be id
       id => axios.get(`http://www.omdbapi.com/?apikey=${searchQuery.apikey}&i=${id}`)
     );
+
+
     // returns a promise obj from endpoint
     let moviesList = await Promise.all(requests)
 
-
     // stores movies into session
     req.session.result = moviesList.map((data) => data.data)
-    console.log(req.session.result)
+
     // redirects the data to another endpoint
     res.redirect("/")
   }
