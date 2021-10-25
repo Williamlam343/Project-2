@@ -18,7 +18,6 @@ router.get("/", (req, res) => {
 
     let result = req.session.result;
 
-
     result.forEach((movie) => {
       if (movie.Poster === "N/A") {
         movie.Poster = null
@@ -28,7 +27,7 @@ router.get("/", (req, res) => {
 
     res.render("home", {
       result,
-      logged_in: req.session.logged_in,
+
       id: req.session.user_id
     })
 
@@ -44,6 +43,7 @@ router.get("/", (req, res) => {
 
 router.post('/', async (req, res, next) => {
   try {
+
     let searchQuery = {
       ...req.body,
       apikey: process.env.APIKEY,
@@ -57,6 +57,7 @@ router.post('/', async (req, res, next) => {
     const { data } = Moviedata
     const imdbTDArr = []
 
+
     // grabs first 10 movie imdb IDs
     for (let i = 0; i < 10; i++) {
       imdbTDArr.push(data.Search[i].imdbID)
@@ -68,11 +69,13 @@ router.post('/', async (req, res, next) => {
       id => axios.get(`http://www.omdbapi.com/?apikey=${searchQuery.apikey}&i=${id}`)
     );
 
+
     // returns a promise obj from endpoint
     let moviesList = await Promise.all(requests)
 
     // stores movies into session
     req.session.result = moviesList.map((data) => data.data)
+
     // redirects the data to another endpoint
     res.redirect("/")
   }
